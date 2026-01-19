@@ -127,7 +127,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public Optional<EmailEntity> findById(String id) { // Исправленный метод
+    public Optional<EmailEntity> findById(String id) {
         return emailRepository.findById(id);
     }
 
