@@ -50,7 +50,7 @@ public class RabbitMQConfig {
     @Bean
     public DefaultClassMapper classMapper() {
         DefaultClassMapper classMapper = new DefaultClassMapper();
-        classMapper.setTrustedPackages("springboot.restapi.dto", "com.example.demo.dto");
+        classMapper.setTrustedPackages("springboot.restapi.dto", "spring.emailservice.dto");
         return classMapper;
     }
     @Bean
