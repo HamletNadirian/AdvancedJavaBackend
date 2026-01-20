@@ -1,31 +1,31 @@
-##### 1. Сборка проектов
-Перед запуском контейнеров необходимо собрать исполняемые файлы (JAR) для обоих сервисов.
-- Email Service (Gradle): Перейдите в директорию email-service и выполните:  
+##### 1. Збірка проектів
+Перед запуском контейнерів необхідно зібрати файли, що виконуються (JAR) для обох сервісів.
+- Email Service (Gradle): Перейдіть в директорію email-service та виконайте:  
 `./gradlew clean buil`
-- Backend Service (Maven): Перейдите в директорию Spring Boot and REST API и выполните:  
+- Backend Service (Maven): Перейдіть до директорії Spring Boot and REST API і виконайте:  
 `mvn clean package`
-- Совет: Вы также можете использовать встроенные инструменты IntelliJ IDEA (вкладки Maven и Gradle в правой части экрана).
-##### 2. Конфигурация Gmail SMTP.
-Для корректной работы рассылки писем:
+- Порада: Ви також можете використовувати вбудовані інструменти IntelliJ IDEA (вкладки Maven та Gradle у правій частині екрану).
+##### 2. Конфігурація Gmail SMTP.
+Для коректної роботи розсилки листів:
 
-1. Включите двухэтапную верификацию в вашем Google-аккаунте.
-2. Перейдите в App Passwords.
-3. Создайте пароль для приложения (назовите его произвольно, например "Java App").
-4. Замена данных: В файлах конфигурации измените:
-   - gamlet.ossmanov@gmail.com — на вашу почту-отправитель.
-   - gamlet.osmanov@gmail.com — на вашу почту-получатель.
-   - Используйте сгенерированный пароль в переменных окружения или файле .env.
+1. Увімкніть двоетапну верифікацію у вашому Google-акаунті, якщо вона не включена.
+2. Перейдіть в App Passwords.
+3. Створіть пароль для програми (назвіть його довільно, наприклад Java App).
+4. Заміна даних: Змініть файли конфігурації:
+   - gamlet.ossmanov@gmail.com — на вашу почту-відправник.
+   - gamlet.ossmanov@gmail.com - на вашу пошту-отримувач.
+   - Використовуйте згенерований пароль у змінних оточенні / файлі .env. (Для того, щоб знайти всі місця скористайтесь 
+пошуком у IntelliJ рядка "хххххххххххххххх" )
 
-##### 3. Запуск инфраструктуры (Docker)
+##### 3. Запуск інфраструктури (Docker)
 
-- Запустите все необходимые компоненты одной командой из корневой папки проекта:
+- Запустіть усі необхідні компоненти однією командою з кореневої папки проекту:
 `docker-compose up -d`
 
-- Запускаем docker.compose.yml подождите пока все сервисы установляться, а после можете запускать EmailServiceApplication и SpringBootAndRestApiApplication. 
-Сервисы можно также вручную запускать=) Например, для elasticsearch ` docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:8.17.10`
+- Сервіси також можна вручну запускати=) Наприклад, для, для elasticsearch ` docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:8.17.10`
 
 #### 4. API и Тестирование.
-- Для отправки простого письма с email-serivce
+- Для відправки простого листа з с email-serivce
 POST  http://localhost:8081/api/emails/send
   {
   "ownerRef": "Hamlet",
@@ -34,9 +34,9 @@ POST  http://localhost:8081/api/emails/send
   "subject": "Test 3",
   "text": "Test email"
   }
-то есть после выполнения запроса приходит письмо на gamlet.osmanov@gmail.com
+  тобто після виконання запиту надходить лист на gamlet.osmanov@gmail.com
   ![Пример получения письма](img/email.png)
-- Для добавления сущности №1 и 2
+- Для додавання сутності №1 и 2
 POST  http://localhost:8080/api/producers
 {
 "name": "Wigram",
@@ -52,12 +52,14 @@ POST  http://localhost:8080/api/movies
   "description": "Sherlock Holmes and his sidekick Dr. Watson join forces to outwit and bring down their fiercest adversary, Professor Moriarty",
   "rating": 7.4
   }
-то есть после выполнения запроса приходит, (условному админу),что был добавлен фильм.
-![Пример получения письма после добавления фильма](img/new_movie_added.png)
-примечания.
-Также,доступен интрефейс сваггера для выполнения операции с сущностями http://localhost:8080/swagger-ui/index.html
-Если вам надо настроить или подсмотреть БД из задания №2,то вот данные.
+тобто після виконання запиту приходить, (умовному адміну), що був доданий фільм.
+![Приклад отримання листа після додавання фільму](img/new_movie_added.png)
+
+Також доступний інтерфейс сваггера для виконання операції з сутностями http://localhost:8080/swagger-ui/index.html
+
+Примітка
+Якщо вам треба налаштувати або підглянути БД із завдання №2, то ось дані.
 `spring.datasource.username=postgres
 spring.datasource.password=hamletnadirian
 spring.datasource.url=jdbc:postgresql://localhost:5432/movies_db
-` ссылка на README.md задание 2,если вам надо подсмотреть  https://github.com/HamletNadirian/AdvancedJavaBackend/tree/master/Spring%20Boot%20and%20REST%20API
+` посилання на README.md завдання 2,якщо вам потрібно підглянути  https://github.com/HamletNadirian/AdvancedJavaBackend/tree/master/Spring%20Boot%20and%20REST%20API
