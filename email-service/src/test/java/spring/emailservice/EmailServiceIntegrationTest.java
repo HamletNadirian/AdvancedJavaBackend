@@ -68,7 +68,7 @@ class EmailServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("Интеграционный тест: успешная отправка email")
+    @DisplayName("Інтеграційний тест: успішне відправлення email")
     void sendEmailIntegration_Success() {
         when(emailRepository.save(any(EmailEntity.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
@@ -85,7 +85,7 @@ class EmailServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("Интеграционный тест: неуспешная отправка email с MailException")
+    @DisplayName("Інтеграційний тест: неуспішне відправлення email с MailException")
     void sendEmailIntegration_Failure() {
         MailException mailException = new org.springframework.mail.MailSendException(
                 "Connection refused: localhost:25"
@@ -108,7 +108,7 @@ class EmailServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("Интеграционный тест: повторная отправка после ошибки")
+    @DisplayName("Інтеграційний тест: повторне відправлення після помилки")
     void retrySendEmailIntegration_Success() {
         failedEmail.setRetryCount(2);
 
@@ -128,7 +128,7 @@ class EmailServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("Интеграционный тест: поиск всех email с пагинацией")
+    @DisplayName("Інтеграційний тест: пошук усіх email з пагінацією")
     void findAllIntegration_WithPagination() {
 
         List<EmailEntity> emails = Arrays.asList(successfulEmail, failedEmail);
@@ -149,7 +149,7 @@ class EmailServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("Интеграционный тест: поиск по статусу")
+    @DisplayName("Інтеграційний тест: пошук за статусом")
     void findByStatusEmailIntegration() {
         List<EmailEntity> errorEmails = Arrays.asList(failedEmail);
         when(emailRepository.findByStatusEmail(StatusEmail.ERROR))
@@ -165,7 +165,7 @@ class EmailServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("Интеграционный тест: несколько неудачных попыток отправки")
+    @DisplayName("Інтеграційний тест: кілька невдалих спроб відправлення")
     void sendEmailIntegration_MultipleFailures() {
         MailException mailException = new org.springframework.mail.MailSendException("SMTP error");
 
@@ -187,7 +187,7 @@ class EmailServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("Интеграционный тест: проверка логирования при ошибке")
+    @DisplayName("Інтеграційний тест: перевірка логування за помилки")
     void sendEmailIntegration_ErrorLogging() {
         String errorMessage = "SMTP Authentication failed";
         MailException mailException = new org.springframework.mail.MailAuthenticationException(errorMessage);
