@@ -153,6 +153,8 @@ public class MovieService {
         dto.setTitle(movie.getTitle());
         dto.setReleaseDate(movie.getReleaseDate());
         dto.setGenre(movie.getGenre());
+        dto.setDescription(movie.getDescription());
+        dto.setRating(movie.getRating());
         dto.setProducerName(movie.getProducer().getName());
         return dto;
     }

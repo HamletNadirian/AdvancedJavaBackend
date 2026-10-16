@@ -150,6 +150,8 @@ http://localhost:8080/swagger-ui/index.html
 
 Use it to test and explore the REST API.
 
+![screenshot](img/screenschot.png)
+
 ---
 
 ## Database Configuration

@@ -53,7 +53,7 @@ public class EmailServiceImpl implements EmailService {
         } catch (MailException e) {
             emailEntity.setStatusEmail(StatusEmail.ERROR);
             emailEntity.setErrorMessage(e.getClass().getName() + ": " + e.getMessage());
-            emailEntity.setLastRetryTime(LocalDateTime.now() .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            emailEntity.setLastRetryTime(formatForElasticsearch(LocalDateTime.now()));
             emailEntity.setRetryCount(emailEntity.getRetryCount() != null ?
                     emailEntity.getRetryCount() + 1 : 1);
             log.error("Failed to send email: {}", e.getMessage());
@@ -65,7 +65,7 @@ public class EmailServiceImpl implements EmailService {
         return dateTime.format(ELASTICSEARCH_DATE_FORMAT);
     }
     public EmailEntity retrySendEmail(EmailEntity emailEntity) {
-        emailEntity.setLastRetryTime(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        emailEntity.setLastRetryTime(formatForElasticsearch(LocalDateTime.now()));
 
         try {
             SimpleMailMessage message = new SimpleMailMessage();
@@ -77,7 +77,7 @@ public class EmailServiceImpl implements EmailService {
             emailSender.send(message);
 
             emailEntity.setStatusEmail(StatusEmail.SENT);
-            emailEntity.setSendDateEmail(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            emailEntity.setSendDateEmail(formatForElasticsearch(LocalDateTime.now()));
             emailEntity.setErrorMessage(null);
 
             log.info("Email resent successfully to: {} (attempt {})",
