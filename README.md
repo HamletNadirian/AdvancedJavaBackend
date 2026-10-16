@@ -9,6 +9,9 @@ Backend Service
 Email Service
 ↓
 Gmail SMTP
+
+![screenshot](img/screenschot.png)
+
 ## Build and Run
 
 ### 1. Build the Services
@@ -149,8 +152,6 @@ http://localhost:8080/swagger-ui/index.html
 ```
 
 Use it to test and explore the REST API.
-
-![screenshot](img/screenschot.png)
 
 ---
 
