@@ -10,7 +10,11 @@ Email Service
 ↓
 Gmail SMTP
 
+Dashboard Section
 ![screenshot](img/screenschot.png)
+
+Movies Section
+![screenshot](img/screenschot2.png)
 
 ## Build and Run
 
